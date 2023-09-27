@@ -1,9 +1,9 @@
 
 
-#Best Pizza App
+# Best Pizza App
 This is a Flask-based web application for managing restaurants, pizzas, and restaurant-pizza associations. It allows you to view, add, and delete restaurants and pizzas, as well as create associations between specific pizzas and restaurants.
 
-##Table of Contents
+## Table of Contents
 Getting Started
 Project Structure
 Models
@@ -12,13 +12,13 @@ Seeding Data
 Getting Started
 Follow these steps to set up and run the Best Pizza App on your local machine:
 
-###Prerequisites
+### Prerequisites
 Python (3.x recommended)
 Flask
 Flask-SQLAlchemy
 Flask-Migrate (for database migrations)
 
-###Installation
+### Installation
 Clone this repository to your local machine and cd into it:
 git clone https://github.com/Slonetech/phase4-week1-codechallenge.git
 
@@ -42,7 +42,7 @@ use flask run to start the server
 
 Open your web browser and navigate to http://localhost:5000 to access the application.
 
-##Project Structure
+## Project Structure
 The project is organized as follows:
 
 app.py: The main Flask application file.
@@ -52,7 +52,7 @@ migrations/: Contains database migration scripts created by Flask-Migrate.
 venv/: A virtual environment (can be created with python -m venv venv).
 Other standard Flask application files (templates, static, etc.) are not shown here for simplicity.
 
-##Models
+## Models
 Restaurant
 Represents a restaurant that serves pizzas.
 Attributes:
