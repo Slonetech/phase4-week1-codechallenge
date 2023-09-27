@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import CheckConstraint, UniqueConstraint
 from sqlalchemy_serializer import SerializerMixin
+from flask_migrate import Migrate
+
 
 db = SQLAlchemy()
 
@@ -11,7 +13,7 @@ class Restaurant(db.Model, SerializerMixin):
     name = db.Column(db.String(50), nullable=False, unique=True)
     address = db.Column(db.String(120), nullable=False)
 
-    restaurant_pizzas = db.relationship('RestaurantPizza', backref='restaurant', lazy=True)
+    restaurant_pizzas = db.relationship('RestaurantPizza', back_populates='restaurant', lazy=True)
 
     # Add a UniqueConstraint for the name
     __table_args__ = (
@@ -27,11 +29,12 @@ class RestaurantPizza(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Float, nullable=False)
     pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id'), nullable=False)
-    restaurant_id = db.Column(db.Integer, nullable=False)
+    restaurant_id = db.Column(db.Integer,db.ForeignKey('restaurants.id'), nullable=False)
 
-    pizza = db.relationship('Pizza', backref=db.backref('restaurant_pizzas', lazy=True))
-
-    # Add a CheckConstraint for the price
+    pizza = db.relationship('Pizza', back_populates='restaurant_pizzas', lazy=True)
+    restaurant = db.relationship('Restaurant', back_populates='restaurant_pizzas', lazy=True)  
+    
+     # Add a CheckConstraint for the price
     __table_args__ = (
         CheckConstraint('price BETWEEN 1 AND 30', name='check_price_range'),
     )
@@ -48,7 +51,7 @@ class Pizza(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
-    restaurant_pizzas = db.relationship('RestaurantPizza', backref='pizza', lazy=True)
+    restaurant_pizzas = db.relationship('RestaurantPizza', back_populates='pizza', lazy=True)
 
     def __repr__(self):
         return '<pizza %r>' % self.name
