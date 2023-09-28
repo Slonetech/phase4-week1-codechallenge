@@ -1,4 +1,4 @@
-from app import app # Replace 'app' with the actual name of your Flask application instance
+from app import app 
 from models import Restaurant, RestaurantPizza, Pizza,db
 from datetime import datetime
 
@@ -12,9 +12,9 @@ def seed_data():
     pizza2 = Pizza(name='Pepperoni', ingredients='Dough, Tomato Sauce, Cheese, Pepperoni', created_at=datetime.now(), updated_at=datetime.now())
 
     # Create restaurant pizzas
-    restaurant_pizza1 = RestaurantPizza(price=10.99, pizza=pizza1, restaurant=restaurant1)
-    restaurant_pizza2 = RestaurantPizza(price=12.99, pizza=pizza2, restaurant=restaurant1)
-    restaurant_pizza3 = RestaurantPizza(price=11.99, pizza=pizza1, restaurant=restaurant2)
+    restaurant_pizza1 = RestaurantPizza(price=10.99, pizza=pizza1.id, restaurant=restaurant1.id)
+    restaurant_pizza2 = RestaurantPizza(price=12.99, pizza=pizza2.id, restaurant=restaurant1.id)
+    restaurant_pizza3 = RestaurantPizza(price=11.99, pizza=pizza1.id, restaurant=restaurant2.id)
 
     # Add data to the session and commit it to the database
     db.session.add_all([restaurant1, restaurant2, pizza1, pizza2, restaurant_pizza1, restaurant_pizza2, restaurant_pizza3])
